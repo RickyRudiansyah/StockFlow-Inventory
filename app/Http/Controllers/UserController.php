@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->get();
-        return view('users.index', compact('users'));
+        return vieww('users.index', compact('users'));
     }
 
     // 2. Tampilkan Form Tambah (Create)
