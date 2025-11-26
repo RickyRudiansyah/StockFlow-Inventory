@@ -2,196 +2,213 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>RINGKASAN INVENTARIS</title>
+    <title>{{ $title ?? 'Ringkasan Eksekutif' }}</title>
     <style>
-        /* RESET DAN FONT */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* RESET & SETUP */
+        @page {
+            margin: 25px;
         }
-
         body {
-            font-family: 'DejaVu Sans', Arial, sans-serif;
-            font-size: 9px;
-            color: #333;
-            line-height: 1.2;
-            padding: 0;
-            margin: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 10pt;
+            color: #2d3748;
+            line-height: 1.3;
         }
 
         /* HEADER */
         .header {
-            background: linear-gradient(135deg, #7209b7 0%, #4361ee 100%);
-            color: white;
-            padding: 12px 15px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .header h1 {
-            font-size: 16px;
-            margin-bottom: 3px;
-            font-weight: bold;
-        }
-
-        .header .subtitle {
-            font-size: 9px;
-            opacity: 0.9;
-        }
-
-        /* META INFO */
-        .meta-info {
-            text-align: center;
-            font-size: 8px;
-            color: #666;
-            margin-bottom: 12px;
-            padding: 0 15px;
-        }
-
-        /* SECTION STYLES */
-        .section {
-            padding: 0 15px;
-            margin-bottom: 12px;
-            page-break-inside: avoid;
-        }
-
-        .section-title {
-            font-size: 10px;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #333;
-            border-bottom: 1px solid #7209b7;
-            padding-bottom: 3px;
-        }
-
-        /* STATS GRID - DIKECILKAN */
-        .stats-grid {
-            display: table;
             width: 100%;
-            margin-bottom: 8px;
+            border-bottom: 3px solid #5a67d8;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
-
-        .stat-card {
-            display: table-cell;
-            width: 16.66%;
-            padding: 3px;
-            vertical-align: top;
-        }
-
-        .stat-card-inner {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            padding: 8px 4px;
-            text-align: center;
-            height: 100%;
-        }
-
-        .stat-card-inner.primary {
-            background: linear-gradient(135deg, #7209b7 0%, #4361ee 100%);
-            color: white;
-            border: none;
-        }
-
-        .stat-card-inner.success {
-            background: linear-gradient(135deg, #06d6a0 0%, #118ab2 100%);
-            color: white;
-            border: none;
-        }
-
-        .stat-card-inner.warning {
-            background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
-            color: white;
-            border: none;
-        }
-
-        .stat-value {
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-
-        .stat-label {
-            font-size: 7px;
+        .header h1 {
+            font-size: 18pt;
+            font-weight: 800;
+            color: #1a202c;
+            margin: 0;
             text-transform: uppercase;
-            opacity: 0.9;
-            line-height: 1.1;
+        }
+        .header .sub {
+            font-size: 10pt;
+            color: #718096;
+            margin-top: 5px;
+        }
+        .header .meta {
+            text-align: right;
+            font-size: 9pt;
+            color: #718096;
         }
 
-        /* TABEL - DIKECILKAN */
-        table {
+        /* STATS BAR */
+        .stats-bar {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .stats-item {
+            text-align: center;
+            padding: 0 8px;
+        }
+        .stats-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3748;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .stats-label {
+            font-size: 8px;
+            text-transform: uppercase;
+            color: #718096;
+            letter-spacing: 0.5px;
+        }
+
+        /* KPI CARDS */
+        .kpi-wrapper {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .kpi-box {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .kpi-box.highlight {
+            background-color: #f0fff4;
+            border-color: #9ae6b4;
+        }
+        .kpi-box.alert {
+            background-color: #fff5f5;
+            border-color: #feb2b2;
+        }
+        .kpi-box.warning {
+            background-color: #fffaf0;
+            border-color: #fbd38d;
+        }
+
+        .kpi-label {
+            font-size: 7pt;
+            text-transform: uppercase;
+            color: #718096;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .kpi-value {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2d3748;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .kpi-sub {
+            font-size: 7pt;
+            color: #718096;
+        }
+
+        /* WARNA TEXT UTILITY */
+        .text-green { color: #2f855a; }
+        .text-red { color: #c53030; }
+        .text-blue { color: #3182ce; }
+        .text-orange { color: #dd6b20; }
+        .font-bold { font-weight: bold; }
+
+        /* TABEL DATA */
+        table.data {
             width: 100%;
             border-collapse: collapse;
-            font-size: 7px;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 8pt;
         }
-
-        table th {
-            background: #495057;
-            color: white;
-            padding: 5px 3px;
+        table.data th {
+            background-color: #edf2f7;
             text-align: left;
-            border: 1px solid #dee2e6;
+            padding: 6px;
+            font-size: 8pt;
+            text-transform: uppercase;
+            border-bottom: 2px solid #cbd5e0;
+        }
+        table.data td {
+            padding: 6px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 8pt;
+        }
+        table.data tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* SECTION TITLE */
+        .section-head {
+            font-size: 10pt;
             font-weight: bold;
-        }
-
-        table td {
-            padding: 5px 3px;
-            border: 1px solid #dee2e6;
-        }
-
-        table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
-
-        /* BADGES & ALERTS */
-        .badge {
-            display: inline-block;
-            padding: 2px 5px;
-            border-radius: 2px;
-            font-size: 7px;
-            font-weight: bold;
+            border-left: 4px solid #5a67d8;
+            padding-left: 8px;
+            margin: 15px 0 8px 0;
+            color: #4a5568;
             text-transform: uppercase;
         }
 
-        .badge-danger {
-            background: #f8d7da;
-            color: #721c24;
+        /* ICON REPLACEMENT (Kotak Warna) */
+        .icon-box {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 5px;
+            border-radius: 2px;
         }
+        .bg-red { background: #e53e3e; }
+        .bg-green { background: #38a169; }
+        .bg-blue { background: #3182ce; }
+        .bg-orange { background: #ed8936; }
 
-        .badge-in {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .badge-out {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .alert-box {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-left: 3px solid #ffc107;
-            padding: 6px 8px;
+        /* UTILS */
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        .badge {
+            padding: 2px 6px;
             border-radius: 3px;
-            margin-bottom: 8px;
-        }
-
-        .alert-box h4 {
-            font-size: 9px;
-            color: #856404;
-            margin-bottom: 2px;
+            font-size: 7pt;
+            color: white;
             font-weight: bold;
         }
+        .bg-green { background: #38a169; }
+        .bg-red { background: #e53e3e; }
 
-        .alert-box p {
-            font-size: 8px;
-            color: #856404;
+        /* PROGRESS BAR */
+        .progress-container {
+            margin-top: 8px;
+        }
+        .progress-item {
+            margin-bottom: 4px;
+        }
+        .progress-bar {
+            background: #e2e8f0;
+            border-radius: 3px;
+            height: 6px;
+            margin: 2px 0;
+        }
+        .progress-fill {
+            background: #3182ce;
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        /* COLUMN LAYOUT */
+        .column-left {
+            float: left;
+            width: 48%;
+        }
+        .column-right {
+            float: right;
+            width: 48%;
+        }
+        .clearfix {
+            clear: both;
         }
 
         /* FOOTER */
@@ -201,209 +218,210 @@
             left: 0;
             right: 0;
             background: #f8f9fa;
-            border-top: 1px solid #dee2e6;
-            padding: 6px 15px;
-            font-size: 7px;
-            display: table;
+            border-top: 1px solid #e2e8f0;
+            padding: 6px 25px;
+            font-size: 7pt;
+            color: #718096;
+        }
+        .footer table {
             width: 100%;
-        }
-
-        .footer .left {
-            display: table-cell;
-            text-align: left;
-            width: 70%;
-        }
-
-        .footer .right {
-            display: table-cell;
-            text-align: right;
-            width: 30%;
-        }
-
-        .currency {
-            font-family: 'DejaVu Sans Mono', monospace;
-            font-weight: bold;
-        }
-
-        /* TWO COLUMN LAYOUT */
-        .two-col {
-            display: table;
-            width: 100%;
-        }
-
-        .two-col .col {
-            display: table-cell;
-            width: 50%;
-            vertical-align: top;
-            padding-right: 5px;
-        }
-
-        .two-col .col:last-child {
-            padding-right: 0;
-            padding-left: 5px;
-        }
-
-        .page-break {
-            page-break-after: always;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>RINGKASAN INVENTARIS</h1>
-        <div class="subtitle">Dibuat pada: {{ $date }}</div>
+
+    <table class="header">
+        <tr>
+            <td width="70%">
+                <h1>Ringkasan Eksekutif</h1>
+                <div class="sub">Laporan Performa Bisnis & Inventaris</div>
+            </td>
+            <td width="30%" class="meta">
+                <b>STOCKFLOW SYSTEM</b><br>
+                {{ $date }}<br>
+                User: {{ $printed_by }}
+            </td>
+        </tr>
+    </table>
+
+    <div class="stats-bar">
+        <table width="100%" cellspacing="8">
+            <tr>
+                <td width="25%" class="stats-item">
+                    <div class="stats-value">{{ $stats['total_barang'] ?? 0 }}</div>
+                    <div class="stats-label">Total Barang</div>
+                </td>
+                <td width="25%" class="stats-item">
+                    <div class="stats-value">{{ $stats['total_kategori'] ?? 0 }}</div>
+                    <div class="stats-label">Kategori</div>
+                </td>
+                <td width="25%" class="stats-item">
+                    <div class="stats-value">{{ $stats['total_supplier'] ?? 0 }}</div>
+                    <div class="stats-label">Supplier</div>
+                </td>
+                <td width="25%" class="stats-item">
+                    <div class="stats-value">{{ $stats['total_transaksi'] ?? 0 }}</div>
+                    <div class="stats-label">Total Transaksi</div>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <div class="meta-info">
-        <strong>Dicetak oleh:</strong> {{ $printed_by }}
-    </div>
+    <table class="kpi-wrapper" cellspacing="8">
+        <tr>
+            <td width="33%" class="kpi-box highlight">
+                <span class="kpi-label text-green">Total Aset (Beli)</span>
+                <span class="kpi-value text-green">Rp {{ number_format($stats['nilai_inventaris'], 0, ',', '.') }}</span>
+                <span class="kpi-sub">Modal Barang Tersimpan</span>
+            </td>
+            <td width="33%" class="kpi-box warning">
+                <span class="kpi-label text-blue">Potensi Omzet</span>
+                <span class="kpi-value text-blue">Rp {{ number_format($stats['potensi_penjualan'], 0, ',', '.') }}</span>
+                <span class="kpi-sub">Margin Kotor: Rp {{ number_format($stats['potensi_penjualan'] - $stats['nilai_inventaris'], 0, ',', '.') }}</span>
+            </td>
+            <td width="33%" class="kpi-box {{ $stok_menipis->count() > 0 ? 'alert' : 'highlight' }}">
+                <span class="kpi-label {{ $stok_menipis->count() > 0 ? 'text-red' : 'text-green' }}">Status Gudang</span>
+                <span class="kpi-value {{ $stok_menipis->count() > 0 ? 'text-red' : 'text-green' }}">
+                    {{ $stok_menipis->count() > 0 ? $stok_menipis->count() . ' Item' : 'Aman' }}
+                </span>
+                <span class="kpi-sub">
+                    {{ $stok_menipis->count() > 0 ? 'Butuh Restock Segera' : 'Semua Stok dalam Level Aman' }}
+                </span>
+            </td>
+        </tr>
+    </table>
 
-    {{-- Statistik Utama --}}
-    <div class="section">
-        <div class="section-title">📊 STATISTIK UMUM</div>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-card-inner primary">
-                    <div class="stat-value">{{ number_format($stats['total_barang']) }}</div>
-                    <div class="stat-label">Total Barang</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-inner">
-                    <div class="stat-value">{{ number_format($stats['total_kategori']) }}</div>
-                    <div class="stat-label">Kategori</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-inner">
-                    <div class="stat-value">{{ number_format($stats['total_supplier']) }}</div>
-                    <div class="stat-label">Supplier</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-inner">
-                    <div class="stat-value">{{ number_format($stats['total_transaksi']) }}</div>
-                    <div class="stat-label">Transaksi</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-inner success">
-                    <div class="stat-value currency">Rp{{ number_format($stats['nilai_inventaris']/1000000, 1) }}jt</div>
-                    <div class="stat-label">Nilai Inventaris</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-inner warning">
-                    <div class="stat-value currency">Rp{{ number_format($stats['potensi_penjualan']/1000000, 1) }}jt</div>
-                    <div class="stat-label">Potensi Jual</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Peringatan Stok Menipis --}}
-    @if($stok_menipis->count() > 0)
-    <div class="section">
-        <div class="section-title">⚠️ PERINGATAN STOK MENIPIS</div>
-        <div class="alert-box">
-            <h4>PERHATIAN!</h4>
-            <p>Ada {{ $stok_menipis->count() }} barang perlu restock</p>
-        </div>
-        <table>
+    <div class="column-left">
+        <div class="section-head"><span class="icon-box bg-red"></span> Prioritas Restock</div>
+        @if($stok_menipis->count() > 0)
+        <table class="data">
             <thead>
                 <tr>
-                    <th style="width: 40%">Nama Barang</th>
-                    <th style="width: 25%">Kategori</th>
-                    <th style="width: 15%" class="text-center">Stok Sekarang</th>
-                    <th style="width: 10%" class="text-center">Stok Minimum</th>
-                    <th style="width: 10%" class="text-center">Selisih</th>
+                    <th style="width: 60%">Barang</th>
+                    <th style="width: 20%" class="text-center">Sisa</th>
+                    <th style="width: 20%" class="text-center">Min</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($stok_menipis as $item)
+                @foreach($stok_menipis->take(5) as $item)
                 <tr>
-                    <td><strong>{{ $item->nama_barang }}</strong></td>
-                    <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
-                    <td class="text-center">
-                        <span class="badge badge-danger">{{ $item->stok }} {{ $item->satuan }}</span>
-                    </td>
+                    <td><b>{{ $item->nama_barang }}</b></td>
+                    <td class="text-center text-red font-bold">{{ $item->stok }} {{ $item->satuan }}</td>
                     <td class="text-center">{{ $item->stok_minimum }}</td>
-                    <td class="text-center" style="color: #dc3545; font-weight: bold;">-{{ $item->stok_minimum - $item->stok }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        @else
+        <div class="kpi-box highlight" style="text-align: center; color: #2f855a; padding: 10px;">
+            <b>Kondisi Aman:</b> Tidak ada stok menipis.
+        </div>
+        @endif
     </div>
-    @endif
 
-    {{-- Transaksi Terbaru --}}
-    <div class="section">
-        <div class="section-title">🕐 TRANSAKSI TERBARU (10 Data)</div>
-        <table>
+    <div class="column-right">
+        <div class="section-head"><span class="icon-box bg-blue"></span> Sebaran Kategori</div>
+        <table class="data">
             <thead>
                 <tr>
-                    <th style="width: 12%">Tanggal</th>
-                    <th style="width: 10%">Tipe</th>
-                    <th style="width: 33%">Barang</th>
-                    <th style="width: 10%" class="text-center">Jumlah</th>
-                    <th style="width: 20%" class="text-right">Nilai</th>
-                    <th style="width: 15%">Oleh</th>
+                    <th style="width: 50%">Kategori</th>
+                    <th style="width: 25%" class="text-center">Jml</th>
+                    <th style="width: 25%" class="text-right">Porsi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($transaksi_terbaru as $trx)
+                @php $totalItems = $kategori_chart->sum('barangs_count'); @endphp
+                @foreach($kategori_chart->take(5) as $kat)
                 <tr>
-                    <td>{{ $trx->tanggal_transaksi->format('d/m/Y') }}</td>
-                    <td class="text-center">
-                        @if($trx->tipe_transaksi === 'masuk')
-                            <span class="badge badge-in">MASUK</span>
-                        @else
-                            <span class="badge badge-out">KELUAR</span>
-                        @endif
-                    </td>
-                    <td>{{ $trx->barang->nama_barang ?? '-' }}</td>
-                    <td class="text-center">{{ $trx->jumlah }}</td>
-                    <td class="text-right currency">Rp {{ number_format($trx->jumlah * $trx->harga_per_unit, 0, ',', '.') }}</td>
-                    <td>{{ $trx->user->name ?? '-' }}</td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="text-center" style="padding: 10px; color: #666;">
-                        Tidak ada transaksi
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    {{-- Komposisi per Kategori --}}
-    <div class="section">
-        <div class="section-title">📁 KOMPOSISI KATEGORI</div>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 60%">Nama Kategori</th>
-                    <th style="width: 20%" class="text-center">Jumlah Barang</th>
-                    <th style="width: 20%" class="text-center">Persentase</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $totalBarangKat = $kategori_chart->sum('barangs_count'); @endphp
-                @foreach($kategori_chart as $kat)
-                <tr>
-                    <td><strong>{{ $kat->nama_kategori }}</strong></td>
+                    <td>{{ $kat->nama_kategori }}</td>
                     <td class="text-center">{{ $kat->barangs_count }}</td>
-                    <td class="text-center">{{ $totalBarangKat > 0 ? round(($kat->barangs_count / $totalBarangKat) * 100, 1) : 0 }}%</td>
+                    <td class="text-right">
+                        {{ $totalItems > 0 ? round(($kat->barangs_count / $totalItems) * 100, 1) : 0 }}%
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <!-- Progress Bar untuk Kategori -->
+        @if($kategori_chart->count() > 0)
+        <div class="progress-container">
+            @foreach($kategori_chart->take(3) as $kat)
+            @php $percentage = $totalItems > 0 ? round(($kat->barangs_count / $totalItems) * 100, 1) : 0; @endphp
+            <div class="progress-item">
+                <div style="display: table; width: 100%; font-size: 7pt;">
+                    <div style="display: table-cell; width: 40%; vertical-align: middle;">{{ $kat->nama_kategori }}</div>
+                    <div style="display: table-cell; width: 50%; vertical-align: middle;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{ $percentage }}%;"></div>
+                        </div>
+                    </div>
+                    <div style="display: table-cell; width: 10%; text-align: right; padding-left: 5px; vertical-align: middle;">{{ $percentage }}%</div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endif
     </div>
+
+    <div class="clearfix"></div>
+
+    <div class="section-head" style="margin-top: 15px;"><span class="icon-box bg-green"></span> Aktivitas Terkini</div>
+    <table class="data">
+        <thead>
+            <tr>
+                <th style="width: 15%">Waktu</th>
+                <th style="width: 12%" class="text-center">Tipe</th>
+                <th style="width: 38%">Barang</th>
+                <th style="width: 10%" class="text-center">Qty</th>
+                <th style="width: 25%" class="text-right">Total Nilai</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($transaksi_terbaru as $trx)
+            <tr>
+                <td>{{ $trx->tanggal_transaksi->format('d/m/y H:i') }}</td>
+                <td class="text-center">
+                    @if($trx->tipe_transaksi == 'masuk')
+                        <span class="badge bg-green">MASUK</span>
+                    @else
+                        <span class="badge bg-red">KELUAR</span>
+                    @endif
+                </td>
+                <td>{{ $trx->barang->nama_barang ?? '-' }}</td>
+                <td class="text-center">{{ $trx->jumlah }}</td>
+                <td class="text-right">Rp {{ number_format($trx->jumlah * $trx->harga_per_unit, 0, ',', '.') }}</td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="5" class="text-center" style="padding: 10px; color: #718096; font-style: italic;">
+                    Belum ada transaksi.
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
 
     <div class="footer">
-        <div class="left">StockFlow - Smart Inventory Management System | Dokumen dibuat otomatis</div>
-        <div class="right">Halaman {PAGE_NUM} dari {PAGE_COUNT}</div>
+        <table>
+            <tr>
+                <td width="70%">StockFlow - Smart Inventory Management System</td>
+                <td width="30%" class="text-right">Halaman {PAGE_NUM} dari {PAGE_COUNT}</td>
+            </tr>
+        </table>
     </div>
+
+    <script type="text/php">
+        if (isset($pdf)) {
+            $text = "Halaman {PAGE_NUM} dari {PAGE_COUNT}";
+            $font = $fontMetrics->get_font("Helvetica, Arial, sans-serif");
+            $size = 7;
+            $width = $fontMetrics->get_text_width($text, $font, $size);
+            $x = ($pdf->get_width() - $width) / 2;
+            $y = $pdf->get_height() - 12;
+            $pdf->page_text($x, $y, $text, $font, $size);
+        }
+    </script>
+
 </body>
 </html>
