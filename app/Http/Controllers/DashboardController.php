@@ -19,7 +19,10 @@ class DashboardController extends Controller
         $totalSupplier = Supplier::count();
 
         // Stok Management - SESUAI dengan field di model Barang
-        $barangMenipis = Barang::where('stok', '<', DB::raw('stok_minimum'))->get();
+        $barangMenipis = Barang::where('stok', '<', DB::raw('stok_minimum'))
+            ->where('stok', '>', 0)
+            ->with('kategori')
+            ->get();
         $barangHabis = Barang::where('stok', 0)->count();
 
         // Data Finansial
@@ -27,9 +30,9 @@ class DashboardController extends Controller
         $potensiProfit = Barang::sum(DB::raw('stok * (harga_jual - harga_beli)'));
 
         // Data untuk Charts - SESUAI dengan method barangs() di model Kategori
-        $chartData = Kategori::withCount('barangs')->get(); // PERBAIKAN: 'barangs' bukan 'barang'
+        $chartData = Kategori::withCount('barangs')->get();
         $chartLabels = $chartData->pluck('nama_kategori');
-        $chartValues = $chartData->pluck('barangs_count'); // PERBAIKAN: 'barangs_count' bukan 'barang_count'
+        $chartValues = $chartData->pluck('barangs_count');
 
         // Data Tambahan
         $transaksiTerbaru = Transaksi::with(['barang', 'user'])

@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +30,15 @@ Route::middleware('auth')->group(function () {
 
     // --- Kategori ---
     Route::resource('kategori', KategoriController::class);
+
+    // --- Supplier ---
+    Route::resource('supplier', SupplierController::class)->except(['show']);
+
+    // --- Barang ---
+    Route::resource('barang', BarangController::class)->except(['show']);
+
+    // --- Transaksi ---
+    Route::resource('transaksi', TransaksiController::class)->only(['index', 'create', 'store', 'show']);
 
     // --- LAPORAN & EXPORT PDF ---
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
