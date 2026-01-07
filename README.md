@@ -60,21 +60,18 @@ Project ini menonjolkan **dashboard analytics**, **validasi data**, dan **export
 ## Screenshots
 
 > Lokasi: folder `screenshots/`
-
 ### Dashboard
 ![Dashboard](screenshots/dashboard.png)
 
 ### Inventory (Barang)
-![Barang](screenshots/barangs.png)
+![Barang](screenshots/barang.png)
 
-### Categories (Kategori)
-![Categories](screenshots/kategoris.png)
+### Categories
+![Kategori](screenshots/kategori.png)
 
-### Suppliers (Supplier)
-![Suppliers](screenshots/suppliers.png)
+### Report & Export
+![Laporan](screenshots/laporan.png)
 
-### Report & Export (PDF)
-![Report](screenshots/laporan.png)
 
 ---
 
