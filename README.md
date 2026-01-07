@@ -1,59 +1,167 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# StockFlow Inventory — Web-Based Inventory Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+StockFlow adalah aplikasi **Inventory Management System** berbasis web untuk membantu pengelolaan **barang, kategori, supplier, stok, serta laporan analisis inventaris**.  
+Project ini menonjolkan **dashboard analytics**, **validasi data**, dan **export laporan** dengan UI modern.
 
-## About Laravel
+> ✅ Cocok untuk showcase **Fullstack / Backend (Laravel)** karena mencakup CRUD, relasi database, reporting, dan export.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Highlights
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 📊 **Dashboard Analytics**: Total aset inventaris, potensi profit (margin), indikator stok, dan visualisasi komposisi kategori  
+- 📦 **Inventory CRUD**: Barang terhubung ke kategori & supplier, stok minimum, harga beli/jual, status stok otomatis  
+- 🤝 **Supplier & Category Management**: Ringkasan jumlah barang per supplier/kategori  
+- 📑 **Report & Export**: Laporan analisis stok + **export PDF**  
+- 🔐 **Authentication**: Login untuk akses halaman internal (admin)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Backend**: Laravel 12, PHP 8+
+- **Database**: MySQL
+- **Frontend**: Blade, Tailwind CSS
+- **Charts / Visualization**: Chart.js
+- **Build Tooling**: Vite, NPM
+- **Architecture**: MVC (Controller, Model, View), Validation, Migration/Seeder
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Features
 
-### Premium Partners
+### Dashboard
+- KPI: total aset inventaris & potensi profit
+- Ringkasan: total produk, supplier, kategori
+- Indikator: stok aman / menipis / habis
+- Grafik: komposisi stok per kategori
+- List: stok terbanyak & stok terendah
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Master Data
+- **Kategori**: create/update/delete, jumlah barang per kategori
+- **Supplier**: create/update/delete, jumlah barang per supplier
+- **Barang**:
+  - SKU/Code otomatis (format seperti `BRG-00001`)
+  - stok minimum & status stok otomatis
+  - harga beli & harga jual
 
-## Contributing
+### Reporting
+- Laporan analisis stok:
+  - KPI aset & profit
+  - distribusi kesehatan stok
+  - top stok menipis/habis & top stok terbanyak
+  - detail inventaris lengkap
+- **Export laporan PDF**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> Catatan: fitur transaksi sedang disesuaikan pada beberapa environment (perbedaan struktur kolom). Focus portfolio project: **inventory + reporting + export**.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Screenshots
 
-## Security Vulnerabilities
+> Lokasi: folder `screenshots/`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
-## License
+### Inventory (Barang)
+![Barang](screenshots/barangs.png)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Categories (Kategori)
+![Categories](screenshots/kategoris.png)
+
+### Suppliers (Supplier)
+![Suppliers](screenshots/suppliers.png)
+
+### Report & Export (PDF)
+![Report](screenshots/laporan.png)
+
+---
+
+## Getting Started (Local Setup)
+
+### 1) Clone
+```bash
+git clone https://github.com/RickyRudiansyah/StockFlow-Inventory.git
+cd StockFlow-Inventory
+
+2) Install Dependencies
+
+composer install
+npm install
+
+3) Setup Environment
+
+cp .env.example .env
+php artisan key:generate
+
+Edit .env (MySQL):
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=stockflow
+DB_USERNAME=root
+DB_PASSWORD=
+
+4) Database Migration & Seed
+
+php artisan migrate --seed
+
+5) Build Assets
+
+Untuk build sekali:
+
+npm run build
+
+Atau mode development (lebih enak saat ngoding):
+
+npm run dev
+
+6) Run Server
+
+php artisan serve
+
+Buka:
+
+http://127.0.0.1:8000
+
+Demo Account
+
+Gunakan akun hasil seeder (jika tersedia).
+Jika tidak ada, buat admin manual via tinker:
+
+php artisan tinker
+
+\App\Models\User::create([
+  'name' => 'Admin',
+  'email' => 'admin@stockflow.test',
+  'password' => bcrypt('admin123'),
+]);
+
+Login:
+
+    Email: admin@stockflow.test
+
+    Password: admin123
+
+Project Scope
+
+Project ini berfokus pada:
+
+    Perancangan database inventory (relasi barang-kategori-supplier)
+
+    Validasi input & data integrity
+
+    Reporting & export PDF
+
+    UI dashboard untuk monitoring inventory
+
+Contributors
+
+    Ricky Rudiansyah
+
+    Privanza Wisnu
+
+    saleh1717
+
